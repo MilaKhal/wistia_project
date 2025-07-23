@@ -1,0 +1,22 @@
+name: Run AWS Glue Job Manually
+
+on:
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+    inputs:
+      job_name:
+        description: 'Glue job name'
+        required: true
+        default: 'wistia_events_incremental'
+
+jobs:
+  run-glue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call AWS Glue Job
+        env:
+          AWS_REGION: us-east-1
+        run: |
+          aws glue start-job-run \
+            --region $AWS_REGION \
+            --job-name "${{ github.event.inputs.job_name }}"
