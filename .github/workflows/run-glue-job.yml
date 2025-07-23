@@ -1,8 +1,13 @@
 name: Run AWS Glue Job
 
 on:
-  workflow_dispatch:  # manual trigger from GitHub UI
-  
+  workflow_dispatch:
+    inputs:
+      job_name:
+        description: 'Glue job name to run'
+        required: true
+        default: 'wistia_events_incremental'
+
 jobs:
   run-glue:
     runs-on: ubuntu-latest
