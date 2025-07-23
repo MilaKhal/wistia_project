@@ -1,3 +1,8 @@
+name: Run AWS Glue Job
+
+on:
+  workflow_dispatch:  # manual trigger from GitHub UI
+  
 jobs:
   run-glue:
     runs-on: ubuntu-latest
