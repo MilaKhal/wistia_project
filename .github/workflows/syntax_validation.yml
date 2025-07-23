@@ -1,10 +1,10 @@
 name: Glue Script Syntax Validation
 
 on:
-  push:                    # triggers syntax check on push
+  push:
     branches:
       - main
-  workflow_dispatch:       # allows manual trigger of Glue job
+  workflow_dispatch:
     inputs:
       job_name:
         description: 'Name of the AWS Glue job'
@@ -29,6 +29,7 @@ jobs:
     name: Run AWS Glue Job
     needs: validate-script
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'   # <--- add this line
 
     steps:
       - name: Checkout repo
