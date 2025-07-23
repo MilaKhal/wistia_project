@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Optional: checkout your repo (if needed)
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # Run your Glue job
       - name: Call AWS Glue Job
         env:
           AWS_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws glue start-job-run \
             --region $AWS_REGION \
