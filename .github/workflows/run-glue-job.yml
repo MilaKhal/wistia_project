@@ -12,13 +12,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # Install AWS CLI before running AWS commands
-      - name: Install AWS CLI
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install
-
       # Run your Glue job
       - name: Call AWS Glue Job
         env:
