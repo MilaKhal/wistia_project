@@ -1,18 +1,20 @@
-name: Run AWS Glue Job Manually
-
-on:
-  workflow_dispatch:  # Allows manual trigger from GitHub UI
-    inputs:
-      job_name:
-        description: 'Glue job name'
-        required: true
-        default: 'wistia_events_incremental'
-
 jobs:
   run-glue:
     runs-on: ubuntu-latest
 
     steps:
+      # Optional: checkout your repo (if needed)
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # Install AWS CLI before running AWS commands
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+
+      # Run your Glue job
       - name: Call AWS Glue Job
         env:
           AWS_REGION: us-east-1
