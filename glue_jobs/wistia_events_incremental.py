@@ -79,8 +79,13 @@ def get_event_data(media_id):
     return events
 
 # Fetch all
-for media_id in media_ids:
-    all_events.extend(get_event_data(media_id))
+try:
+    for media_id in media_ids:
+        all_events.extend(get_event_data(media_id))
+except requests.RequestException as e:
+    print(f"❌ API error for Wistia events: {e}")
+    job.commit()
+    sys.exit(1)
 
 # ---- Step 4: Save to S3 ----
 if all_events:
