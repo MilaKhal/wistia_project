@@ -45,13 +45,13 @@ This project implements a **data pipeline and dashboard** to ingest, process, an
 
 ## Folder Structure
 
-wistia_project/
-├── glue_jobs/            # AWS Glue ETL scripts
-├── streamlit_app/        # Streamlit dashboard code
-│   └── requirements.txt  # Python dependencies for Streamlit app
-├── sql/                  # Athena DDL scripts for table creation
-└── .github/
-    └── workflows/        # GitHub Actions CI/CD pipeline configurations
+    wistia_project/
+    ├── glue_jobs/            # AWS Glue ETL scripts
+    ├── streamlit_app/        # Streamlit dashboard code
+    │   └── requirements.txt  # Python dependencies for Streamlit app
+    ├── sql/                  # Athena DDL scripts for table creation
+    └── .github/
+        └── workflows/        # GitHub Actions CI/CD pipeline configurations
 ---
 
 ## Setup and Installation
