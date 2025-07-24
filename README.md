@@ -21,7 +21,7 @@ This project implements a **data pipeline and dashboard** to ingest, process, an
 
 ### 4. AWS Glue (PySpark) – Data Transformation  
 - **Purpose:** Reads raw data from S3, deduplicates records, normalizes fields, and prepares datasets for analytics.  
-- **Why:** Enables scalable and distributed data processing without managing infrastructure.
+- **Why:** Enables scalable and distributed data processing without managing infrastructure. Incremental runs are scheduled daily in AWS. 
 
 ### 5. Amazon S3 (Curated Layer) – Cleaned Data Storage  
 - **Purpose:** Stores the cleaned, partitioned, and optimized Parquet files output from Glue jobs.  
@@ -37,7 +37,7 @@ This project implements a **data pipeline and dashboard** to ingest, process, an
   <img width="634" height="477" alt="image" src="https://github.com/user-attachments/assets/f626eb15-694a-41c7-8418-c23effee5145" />
 
 
-### 8. Streamlit – Interactive Dashboard  
+### 8. [Streamlit – Interactive Dashboard](https://wistiaproject-8hwzdve8v646pdwteyhjbg.streamlit.app/)
 - **Purpose:** Offers a Python-based, interactive front end to explore Wistia engagement metrics and insights.  
 - **Why:** Allows users to visualize real-time analytics by running Athena queries via an intuitive UI.
 
@@ -45,3 +45,50 @@ This project implements a **data pipeline and dashboard** to ingest, process, an
 
 ## Folder Structure
 
+wistia_project/
+├── glue_jobs/            # AWS Glue ETL scripts
+├── streamlit_app/        # Streamlit dashboard code
+│   └── requirements.txt  # Python dependencies for Streamlit app
+├── sql/                  # Athena DDL scripts for table creation
+└── .github/
+    └── workflows/        # GitHub Actions CI/CD pipeline configurations
+---
+
+## Setup and Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/MilaKhal/wistia_project.git
+    cd your-repo
+    ```
+
+2. Install Python dependencies (for local Streamlit app testing):
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. Configure AWS credentials via environment variables or AWS CLI:
+    ```bash
+    aws configure
+    ```
+
+4. Add necessary Wistia API token to Secret Manger in AWS, and AWS keys to GitHub and Streamlit Cloud.
+
+---
+
+## Usage
+
+- **AWS Glue jobs**: Managed via AWS Console, incremental runs can be manually triggered through GitHub Actions CI/CD pipeline.
+- **Streamlit dashboard**: Deployed on Streamlit Cloud, updated automatically via GitHub Actions on code push. Refreshes data every 24 hours. 
+- **Athena**: Use the Glue Data Catalog to query curated data stored in S3.
+
+---
+
+## CI/CD Pipeline
+
+- Uses GitHub Actions to:
+  - Run syntax checks on Python scripts.
+  - Deploy AWS Glue jobs automatically.
+  - Deploy Streamlit app on push to `main` branch.
+
+---
